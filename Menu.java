@@ -4,6 +4,7 @@ import org.josemorente.datos.IngresoDatos;
 import org.josemorente.controller.ControllerAlumno;
 import org.josemorente.controller.ControllerMateria;
 import org.josemorente.controller.ControllerAsignacion;
+import org.josemorente.resources.LectorArchivo;
 
 public class Menu {
 	public static Menu instance;
@@ -15,6 +16,7 @@ public class Menu {
 	private String horario = "";
 	private int idMateria = 0;
 	private int idAlumno = 0;
+	private String ruta = "";
 	
 	public Menu() {	
 		ControllerAlumno.getInstance().addAlumno("Jose Rafael", "Morente Gonzalez", 2015032);
@@ -48,6 +50,7 @@ public class Menu {
 		System.out.println("¦ 2) Materias                                 ¦");
 		System.out.println("¦ 3) Asignaciones                             ¦");
 		System.out.println("¦ 4) Generar Reporte                          ¦");
+		System.out.println("¦ 5) Leer Reporte                             ¦");
 		System.out.println("+_____________________________________________+");
 		eleccion = IngresoDatos.getInstance().texto();
 		switch(eleccion.toUpperCase()) {
@@ -63,6 +66,9 @@ public class Menu {
 			case "4":
 				ControllerAsignacion.getInstance().generateXml();
 				showMenu();
+			break;
+			case "5":
+				showLeerArchivo();
 			break;
 			case "SALIR":
 			System.exit(1);
@@ -198,5 +204,14 @@ public class Menu {
 		if(eleccion.equals("N")) {
 			showMenuAsignacion();
 		}
+	}
+	
+	public void showLeerArchivo() {
+		System.out.println("+_____________________________________________+");
+		System.out.println("+___________________ARCHIVO___________________+");
+		System.out.println("Escriba la ruta");
+		ruta = IngresoDatos.getInstance().texto();
+		LectorArchivo.getInstance().leerRuta(ruta);
+		showMenu();
 	}
 }

@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
+import java.io.File;
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -132,15 +133,19 @@ public class ControllerAsignacion {
 					staff.appendChild(horarioMateria);
 				}
 			}	
+			
+		File folder = new File("C:/Reporte");
+		folder.mkdirs();
 		
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
 		DOMSource source = new DOMSource(doc);
-		StreamResult result = new StreamResult(new File("C:/Reporte/file.xml"));
+		StreamResult result = new StreamResult(new File("C:/Reporte/Reporte.xml"));
 
 		transformer.transform(source, result);
-
+		System.out.println("+_____________________________________________+");
 		System.out.println("Archivo guardado!");
+		System.out.println("+_____________________________________________+");
 		} catch(ParserConfigurationException pce) {
 			pce.printStackTrace();
 		} catch (TransformerException tfe) {
